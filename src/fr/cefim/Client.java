@@ -1,20 +1,22 @@
 package fr.cefim;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Client {
     private String nom;
+    private int numero;
     private ArrayList<Compte> comptes = new ArrayList<>();
     private int nbComptes = comptes.size();
-    float totalSolde;
+    private int totalSolde;
 
     public Client() {
         nom = "Client";
     }
 
-    public Client(String nomClient) {
+    public Client(String nomClient, int numeroClient) {
         nom = nomClient;
+        numero = numeroClient;
     }
 
     String getNom() {
@@ -23,6 +25,7 @@ public class Client {
     int getNbComptes() {
         return nbComptes;
     }
+    int getNumero() { return numero; }
 
     float getSolde() {
         comptes.forEach((compte) -> totalSolde += compte.getSolde());
@@ -33,5 +36,16 @@ public class Client {
     }
     void ajouterCompte(Compte compte) {
         comptes.add(compte);
+    }
+
+    Compte getCompte(int compteNb) {
+        AtomicReference<Compte> result = new AtomicReference<Compte>();
+        comptes.forEach((compte) -> {
+            if (compteNb == compte.getNumero()) {
+                result.set(compte);
+            }
+        });
+
+        return result.get();
     }
 }
