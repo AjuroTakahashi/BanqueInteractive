@@ -98,6 +98,7 @@ public class Banque {
                     case 5:
                         Random random = new Random();
                         Compte compte = new Compte(random.nextInt(1000), 100);
+                        client.ajouterCompte(compte);
                         System.out.println("Numéro du nouveau compte : " + compte.getNumero());
                         interaction();
                         break;
@@ -129,8 +130,6 @@ public class Banque {
                 System.out.println("Indiquez le numéro du compte destinataire");
                 int destinataire = scanner.nextInt();
                 Compte compteDestinataire = client.getCompte(destinataire);
-                System.out.println(compteDestinataire);
-                System.out.println(compte);
                 compte.virer(value, compteDestinataire);
                 break;
             default:
