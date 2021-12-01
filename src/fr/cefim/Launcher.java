@@ -2,8 +2,9 @@ package fr.cefim;
 
 public class Launcher {
     public static void main(String[] args) {
-        Compte compte = new Compte(1, 123);
-        Compte quack = new Compte(2, 123);
+        Compte compte = new Compte(1, -140);
+        Compte quack = new Compte(2, 130);
+        quack.virer(10, compte);
 
         Client alexandre = new Client("Alexandre", 123);
         alexandre.ajouterCompte(compte);
@@ -11,7 +12,7 @@ public class Launcher {
 
         Banque bank = new Banque();
         bank.ajouterClient(alexandre);
-        bank.interaction();
-
+        bank.renflouer(alexandre, compte);
+//        bank.interaction();
     }
 }

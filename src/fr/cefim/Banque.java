@@ -4,7 +4,6 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Banque {
-//    private ArrayList<Client> clients = new ArrayList<>();
     private Map<Integer, Client> listClient = new HashMap<>();
     private Scanner scanner = new Scanner(System.in);
     private int id = 1;
@@ -18,7 +17,7 @@ public class Banque {
         AtomicReference<Float> bilan = new AtomicReference<>((float) 0);
         listClient.forEach((id, client) -> {
             if (client.getNumero() == clientNumero) {
-                bilan.set(client.getSolde());
+                bilan.set(client.getTotalSolde());
             }
         });
         return bilan.get();
@@ -85,6 +84,7 @@ public class Banque {
                 switch (choice) {
                     case 1:
                         afficherBilan(client.getNumero());
+                        interaction();
                         break;
                     case 2:
                         interactionArgent("retrait", client);
@@ -122,6 +122,9 @@ public class Banque {
         switch(type) {
             case "retrait":
                 compte.retrait(value);
+                if (compte.isCourant() && compte.getSolde() < 0) {
+                    renflouer(client, compte);
+                }
                 break;
             case "depot":
                 compte.depot(value);
@@ -135,15 +138,46 @@ public class Banque {
             default:
                 System.out.println("Erreur");
         }
+        interaction();
     }
 
     void interactionBilanGeneral() {
         AtomicReference<Float> bilanGeneral = new AtomicReference<>((float) 0);
         listClient.forEach((key, client) -> {
-            bilanGeneral.updateAndGet(v -> (float) (v + client.getSolde()));
+            bilanGeneral.updateAndGet(v -> (float) (v + client.getTotalSolde()));
         });
 
         System.out.println(bilanGeneral.get());
+    }
+
+    void renflouer(Client client, Compte compte) {
+
+        ArrayList<Compte> comptes = client.getComptes();
+        comptes.forEach((clientCompte) -> {
+            if (compte.getSolde() + clientCompte.getSolde() >= 0) {
+                clientCompte.virer(compte.getSolde(), compte);
+                System.out.println(compte.getSolde());
+            } else {
+                clientCompte.virer(clientCompte.getSolde(), compte);
+            }
+        });
+
+        if (compte.getSolde() >= 0) {
+            System.out.println("Compte renfloué");
+        } else {
+            System.out.println("Pas assez de solde pour renflouer");
+        }
+        System.out.println("Solde du compte courant : " + compte.getSolde());
+        interaction();
+    }
+
+    void renflouerTous() {
+        listClient.forEach((key, client) -> {
+            if (client.hasCompteCourant()) {
+                Compte compteCourant = client.getCompteCourant();
+                renflouer(client, compteCourant);
+            }
+        });
     }
 
 }
