@@ -24,7 +24,7 @@ public class Compte {
     }
 
     void retrait(float valeur) {
-        this.solde -= valeur;
+        this.solde = this.solde - valeur;
     }
 
     float getSolde() {
