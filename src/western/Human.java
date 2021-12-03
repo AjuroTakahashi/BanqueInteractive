@@ -10,23 +10,23 @@ public class Human {
         this.favoriteDrink = favoriteDrink;
     }
 
-    public void speak() {
-        System.out.println(this.name + " is speaking.");
+    public void says(String text) {
+        System.out.println(this.name + " says : " + text);
     }
 
     public void introduce() {
-        System.out.println("Hi, my name is " + this.name + " and my favorite drink is " + this.favoriteDrink);
+        this.says("Hi, my name is " + this.name + " and my favorite drink is " + this.favoriteDrink);
     }
 
     public void drink() {
-        System.out.println("What a nice glass of " + this.favoriteDrink + " ! *SLURP*");
+        this.says("What a nice glass of " + this.favoriteDrink + " ! *SLURP*");
     }
 
     public String getName() {
         return this.name;
     }
 
-    public String simpleIntroduction() {
-        return this.name;
+    public void simpleIntroduction() {
+        says(this.name);
     }
 }

@@ -13,12 +13,13 @@ public class Indian extends Human {
     }
 
     @Override
-    public String simpleIntroduction() {
+    public void simpleIntroduction() {
         String feathers = " feathers.";
         if (this.nbFeathers == 1 ) {
             feathers = " feather.";
         }
-        return super.simpleIntroduction() + ". And I have " + this.nbFeathers + feathers;
+        super.simpleIntroduction();
+        says(". And I have " + this.nbFeathers + feathers);
     }
 
     protected void scalps(Paleface paleface) {

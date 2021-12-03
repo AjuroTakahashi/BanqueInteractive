@@ -16,8 +16,8 @@ public class Bandit extends Human implements Outlaw {
     }
 
     @Override
-    public String simpleIntroduction() {
-        return this.getName() + " the " + this.look;
+    public void simpleIntroduction() {
+        says(this.getName() + " the " + this.look);
     }
 
     protected void extendedIntroduction() {

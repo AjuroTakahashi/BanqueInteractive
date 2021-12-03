@@ -12,13 +12,17 @@ public class Story {
         Ripoux ripoux = new Ripoux("rip");
         Indian indian = new Indian("Indian");
 
-        bandit.kidnaps(lady);
-        indian.scalps(cowboy);
-        indian.scalps(lady);
-        indian.scalps(bandit);
-        indian.scalps(clint);
-        indian.scalps(ripoux);
+        cowboy.simpleIntroduction();
+        barman.introduce();
+        barman.simpleIntroduction();
 
-        System.out.println(indian.nbFeathers);
+//        bandit.kidnaps(lady);
+//        indian.scalps(cowboy);
+//        indian.scalps(lady);
+//        indian.scalps(bandit);
+//        indian.scalps(clint);
+//        indian.scalps(ripoux);
+//
+//        System.out.println(indian.nbFeathers);
     }
 }

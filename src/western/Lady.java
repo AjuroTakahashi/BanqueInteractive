@@ -16,8 +16,8 @@ public class Lady extends Human implements Paleface {
     }
 
     @Override
-    public String simpleIntroduction() {
-        return "Miss " + this.getName();
+    public void simpleIntroduction() {
+        says("Miss " + this.getName());
     }
 
     protected String getDressColor() {

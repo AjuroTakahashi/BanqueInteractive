@@ -18,13 +18,14 @@ public class Barman extends Human {
         this.barName = barName;
     }
 
-    private void says (String sentence) {
-        System.out.println(sentence + " Coco.");
+    @Override
+    public void says (String sentence) {
+        System.out.println(this.getName() + " says : " + sentence + " Coco.");
     }
 
     @Override
     public void introduce() {
         super.introduce();
-        System.out.println("And my bar is " + this.barName + " !");
+        says("And my bar is " + this.barName + " !");
     }
 }

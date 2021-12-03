@@ -23,8 +23,8 @@ public class Sheriff extends Cowboy {
     }
 
     @Override
-    public String simpleIntroduction() {
-        return "Sheriff" + this.getName();
+    public void simpleIntroduction() {
+        says("Sheriff" + this.getName());
     }
 
     protected void arrests(Outlaw outlaw) {
