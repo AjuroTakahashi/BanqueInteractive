@@ -8,15 +8,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class JeuDuPendu {
 
     public Scanner scanner = new Scanner(System.in);
-    public Map<Integer, Character> lettersModel;
+    public Map<Integer, Character> lettersModel = new HashMap<Integer, Character>();
     public Map<Integer, Character> letters = new HashMap<Integer, Character>();
     public Character[] wordArray;
     public String word;
     public int maxErrors = 10;
     public int tries = 0;
 
-    public JeuDuPendu() {
-        lettersModel = new HashMap<Integer, Character>();
+    public void start() {
+
         word = WordUtil.generateRandomWord();
         wordArray = new Character[word.length()];
 
@@ -24,29 +24,26 @@ public class JeuDuPendu {
             wordArray[i] = word.charAt(i);
         }
 
-        Character[] machin = wordArray;
+        Character[] characters = wordArray;
         int i = 0;
-        for (Character c : machin) {
+        for (Character c : characters) {
             lettersModel.put(i, c);
             i++;
         }
-    }
-
-    public void start() {
 
         do {
             AtomicBoolean found = new AtomicBoolean(false);
-            Character[] quack = new Character[0];
-            for (int a = 0; a < lettersModel.size(); a++) {
-                quack = new Character[lettersModel.size()];
-                Arrays.fill(quack, '_');
+            Character[] charactersShown = new Character[0];
+            for (int index = 0; index < lettersModel.size(); index++) {
+                charactersShown = new Character[lettersModel.size()];
+                Arrays.fill(charactersShown, '_');
                 for (Map.Entry<Integer, Character> entry : letters.entrySet()) {
-                    Integer zz = entry.getKey();
-                    Character ll = entry.getValue();
-                    quack[zz] = ll;
+                    Integer key = entry.getKey();
+                    Character value = entry.getValue();
+                    charactersShown[key] = value;
                 }
             }
-            System.out.println(Arrays.toString(quack));
+            System.out.println(Arrays.toString(charactersShown));
             Character letter = giveLetter();
             lettersModel.forEach((index, l) -> {
                 if (l == letter) {
