@@ -1,6 +1,8 @@
 package reservation;
 
 import logement.Logement;
+
+import java.text.DateFormat;
 import java.util.Date;
 
 public class Sejour {
@@ -17,9 +19,16 @@ public class Sejour {
         this.nbVoyageurs = nbVoyageurs;
     }
 
+    public String dateFormat() {
+        DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
+                DateFormat.SHORT,
+                DateFormat.SHORT);
+        return shortDateFormat.format(this.dateArrivee);
+    }
+
     public void afficher() {
         logement.afficher();
-        System.out.println("La date d'arrivée est le " + this.dateArrivee + " pour " + this.nbNuits + " nuit(s).");
+        System.out.println("La date d'arrivée est le " + dateFormat() + " pour " + this.nbNuits + " nuit(s).");
         System.out.println("Le prix de ce séjour est de " + this.logement.getTarifParNuit() * this.nbNuits + ".");
     }
 }
